@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-surface: #06060b;
+  --color-surface-elevated: #0c0c14;
+  --color-accent-violet: #8b5cf6;
+  --color-accent-cyan: #22d3ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-surface);
+}
+
+.bg-cta-gradient {
+  background: linear-gradient(
+    120deg,
+    #ff006e 0%,
+    #ff5e00 18%,
+    #ffbe0b 36%,
+    #8338ec 54%,
+    #3a86ff 72%,
+    #00f5d4 100%
+  );
+  background-size: 280% 280%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.bg-cta-glow {
+  background: linear-gradient(
+    120deg,
+    #ff006e,
+    #ff5e00,
+    #8338ec,
+    #3a86ff,
+    #00f5d4
+  );
+  background-size: 280% 280%;
+}
+
+.text-cta-gradient {
+  display: inline-block;
+  padding-bottom: 0.14em;
+  line-height: 1.25;
+  overflow: visible;
+  background: linear-gradient(
+    120deg,
+    #ff8fab 0%,
+    #ffb703 25%,
+    #c77dff 50%,
+    #48cae4 75%,
+    #90e0ef 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.scene-grid-floor {
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.35) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to top, black 0%, transparent 85%);
+}
+
+.perspective-section {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.card-3d-lift {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-3d-lift:hover {
+  transform: translateY(-6px) translateZ(12px) rotateX(2deg);
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}

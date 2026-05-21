@@ -1,0 +1,5 @@
+export { HomePage } from './Home'
+export { FeaturesPage } from './Features'
+export { UploadPage } from './Upload'
+export { ResultPage } from './Result'
+export { NotFoundPage } from './NotFound'
