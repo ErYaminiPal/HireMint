@@ -10,7 +10,7 @@ export function ResultPage() {
         <PageIntro
           eyebrow="Report"
           title="Your analysis results"
-          description="Demo insights from SkillMint AI. Upload a resume to generate your live report."
+          description="Demo insights from HireMint AI. Upload a resume to generate your live report."
           action={
             <GlowButton to={ROUTES.UPLOAD} variant="secondary">
               Re-run analysis

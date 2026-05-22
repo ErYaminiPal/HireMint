@@ -28,7 +28,7 @@ export function Footer() {
               to={ROUTES.HOME}
               className="text-xl font-bold tracking-tight text-white"
             >
-              SkillMint
+              HireMint
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
               AI resume intelligence for professionals who refuse to blend in.
@@ -92,7 +92,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="text-sm text-gray-600">
-            © {new Date().getFullYear()} SkillMint. All rights reserved.
+            © {new Date().getFullYear()} HireMint. All rights reserved.
           </p>
           <p className="text-sm text-gray-600">
             Built for the future of work.

@@ -9,7 +9,7 @@ import { TiltCard } from '../ui/TiltCard'
 const easeOut = [0.22, 1, 0.36, 1] as const
 
 const TAGLINE =
-  'SkillMint analyzes your resume with advanced AI, surfaces skill gaps, and delivers actionable insights.'
+  'HireMint analyzes your resume with advanced AI, surfaces skill gaps, and delivers actionable insights.'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -91,7 +91,7 @@ export function Hero() {
               <span className="size-2.5 rounded-full bg-red-400/80" />
               <span className="size-2.5 rounded-full bg-amber-400/80" />
               <span className="size-2.5 rounded-full bg-emerald-400/80" />
-              <span className="text-xs text-gray-500">skillmint-analysis.json</span>
+              <span className="text-xs text-gray-500">hiremint-analysis.json</span>
             </div>
             <div className="grid gap-4 p-4 sm:grid-cols-3 sm:p-6">
               {[

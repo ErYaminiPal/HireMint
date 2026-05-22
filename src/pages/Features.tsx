@@ -10,7 +10,7 @@ export function FeaturesPage() {
         <PageIntro
           eyebrow="Platform"
           title="Powerful features"
-          description="Everything SkillMint delivers to turn your resume into interview-winning material."
+          description="Everything HireMint delivers to turn your resume into interview-winning material."
           action={
             <GlowButton to={ROUTES.UPLOAD}>Start free analysis</GlowButton>
           }

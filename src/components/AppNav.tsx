@@ -22,7 +22,7 @@ export function AppNav() {
             to={ROUTES.HOME}
             className="text-cta-gradient text-lg font-bold tracking-tight"
           >
-            SkillMint
+            HireMint
           </Link>
         </motion.div>
 
