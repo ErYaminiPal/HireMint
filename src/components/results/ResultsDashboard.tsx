@@ -4,29 +4,39 @@ import { ROUTES } from '../../routes/paths'
 import { CopyRow, CopySeparator } from '../ui/CopyRow'
 import { GlowButton } from '../ui/GlowButton'
 import { TiltCard } from '../ui/TiltCard'
+import { useLocation } from 'react-router-dom'
 
 const easeOut = [0.22, 1, 0.36, 1] as const
 
-const scores = [
-  { label: 'ATS Score', value: 94, color: 'from-emerald-500 to-teal-400' },
-  { label: 'Role Match', value: 87, color: 'from-rose-500 to-fuchsia-500' },
-  { label: 'Impact Score', value: 91, color: 'from-cyan-500 to-blue-500' },
-]
+export function ResultsDashboard() 
+{
+  const location = useLocation()
+  const aiData = location.state?.aiData
+  const scores = [
+    {
+      label: 'ATS Score',
+      value: aiData?.atsScore || 0,
+      color: 'from-emerald-500 to-teal-400',
+    },
+  ]
 
-const skills = [
-  { name: 'React / TypeScript', level: 92, status: 'strong' as const },
-  { name: 'System Design', level: 74, status: 'gap' as const },
-  { name: 'Leadership', level: 88, status: 'strong' as const },
-  { name: 'Cloud (AWS)', level: 68, status: 'gap' as const },
-]
+  const strengths =
+    aiData?.strengths?.map((item: string) => ({
+      name: item,
+      level: 90,
+      status: 'strong' as const,
+    })) || []
 
-const recommendations = [
-  'Add quantified outcomes to your latest role bullet points.',
-  'Include "system design" and "distributed systems" for senior SWE roles.',
-  'Reorder skills section to lead with React, Node, and AWS.',
-]
+  const weaknesses =
+    aiData?.weaknesses?.map((item: string) => ({
+      name: item,
+      level: 60,
+      status: 'gap' as const,
+    })) || []
 
-export function ResultsDashboard() {
+  const mergedSkills = [...strengths, ...weaknesses]
+
+  const recommendations: string[] = aiData?.suggestions || []
   return (
     <div className="space-y-8">
       <div className="grid gap-5 sm:grid-cols-3">
@@ -66,7 +76,7 @@ export function ResultsDashboard() {
             </p>
           </CopyRow>
           <ul className="space-y-4">
-            {skills.map((skill, i) => (
+            {mergedSkills.map((skill, i) => (
               <motion.li
                 key={skill.name}
                 initial={{ opacity: 0, x: -12 }}

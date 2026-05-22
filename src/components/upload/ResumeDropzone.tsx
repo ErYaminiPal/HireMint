@@ -1,4 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { extractTextFromPDF } from '../../utils/extractText'
+import { analyzeResume } from '../../utils/gemini'
 import {
   AlertCircle,
   CheckCircle2,
@@ -39,28 +41,62 @@ export function ResumeDropzone() {
   const [uploading, setUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploaded, setUploaded] = useState(false)
+  const [resumeText, setResumeText] = useState('')
 
-  const simulateUpload = () => {
+  const simulateUpload = async () => {
+    if (!file) return
+  
     setUploading(true)
     setUploadProgress(0)
     setUploaded(false)
+  
+    try {
+      let progress = 0
+  
+      const interval = setInterval(() => {
+        progress += 10
+  
+        if (progress <= 90) {
+          setUploadProgress(progress)
+        }
+      }, 120)
+  
+      const extractedText = await extractTextFromPDF(file)
+      console.log('Extracted text ready')
 
-    let progress = 0
+      const aiResponse = await analyzeResume(extractedText)
 
-    const interval = setInterval(() => {
-      progress += 10
-      setUploadProgress(progress)
-
-      if (progress >= 100) {
-        clearInterval(interval)
+      console.log('AI response received')
+      console.log(aiResponse)
+      console.log(aiResponse)
+  
+      console.log(extractedText)
+  
+      setResumeText(extractedText)
+  
+      clearInterval(interval)
+  
+      setUploadProgress(100)
+  
+      setTimeout(() => {
         setUploading(false)
         setUploaded(true)
-
-        setTimeout(() => {
-          navigate(ROUTES.RESULT)
-        }, 1200)
-      }
-    }, 120)
+  
+        navigate(ROUTES.RESULT, {
+          state: {
+            resumeText: extractedText,
+            fileName: file.name,
+            aiData: aiResponse,
+          },
+        })
+      }, 800)
+    } catch (error) {
+      console.error('AI ANALYSIS ERROR:', error)
+    
+      alert('AI servers are busy right now. Please try again in a few seconds.')
+    
+      setUploading(false)
+    }
   }
 
   const applyFile = useCallback((incoming: File | null) => {
